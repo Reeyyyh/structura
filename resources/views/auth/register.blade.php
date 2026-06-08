@@ -77,7 +77,7 @@
                 </div>
 
                 <form id="register-form" method="POST" action="{{ route('register') }}"
-                    class="bg-white rounded-md max-w-md w-full space-y-6 mx-auto px-4 sm:px-6 md:px-0">
+                    class="bg-white rounded-md max-w-md w-full space-y-6 mx-auto px-4 sm:px-6 md:px-0" novalidate>
                     @csrf
                     <h3 class="text-gray-800 text-3xl font-extrabold mb-8 animate-popUpOut">
                         Register

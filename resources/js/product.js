@@ -1,28 +1,46 @@
-// document.getElementById('filter-form').addEventListener('change', function() {
-//     this.submit();
-// });
+document.addEventListener("DOMContentLoaded", function () {
 
+    // =========================
+    // SORT PRICE
+    // =========================
+    const sortPrice = document.getElementById('sort-price');
+    const filterForm = document.getElementById('filter-form');
 
-// Submit form when sorting or categories change
-document.getElementById('sort-price').addEventListener('change', function () {
-    document.getElementById('filter-form').submit();
-});
+    if (sortPrice && filterForm) {
+        sortPrice.addEventListener('change', function () {
+            filterForm.submit();
+        });
+    }
 
-// Submit form when checkbox kategori berubah
-document.querySelectorAll("#sidebar input[type=checkbox]").forEach((el) => {
-    el.addEventListener("change", () => {
-        document.getElementById("filter-form").submit();
+    // =========================
+    // CHECKBOX CATEGORY
+    // =========================
+    const sidebar = document.querySelector("#sidebar");
+
+    if (sidebar && filterForm) {
+        const checkboxes = sidebar.querySelectorAll("input[type=checkbox]");
+
+        checkboxes.forEach((el) => {
+            el.addEventListener("change", () => {
+                filterForm.submit();
+            });
+        });
+    }
+
+    // =========================
+    // PRICE INPUT ENTER
+    // =========================
+    const priceInputs = document.querySelectorAll(
+        'input[name="price_from"], input[name="price_to"]'
+    );
+
+    priceInputs.forEach(input => {
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (filterForm) filterForm.submit();
+            }
+        });
     });
+
 });
-
-
-// Submit form saat enter di input price
-document.querySelectorAll('input[name="price_from"], input[name="price_to"]').forEach(input => {
-    input.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            document.getElementById('filter-form').submit();
-        }
-    });
-});
-

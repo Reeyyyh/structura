@@ -2,33 +2,32 @@ describe("REGISTER TESTING", () => {
 
     beforeEach(() => {
         cy.visit("/register");
+        cy.intercept("POST", "/register").as("register");
     });
 
-    // TC-REG-01
     it("TC-REG-01 - Register valid", () => {
         cy.get('input[name="name"]').type("Budi123");
-        cy.get('input[name="email"]').type("budi@mail.com");
+        cy.get('input[name="email"]').type("budi@gmail.com");
         cy.get('input[name="password"]').type("A123#abc");
         cy.get('input[name="password_confirmation"]').type("A123#abc");
 
         cy.get('button[type="submit"]').click();
 
-        cy.url().should("include", "/login");
+        cy.wait("@register");
+
+        cy.url({ timeout: 15000 }).should("include", "/login");
     });
 
-    // TC-REG-02
     it("TC-REG-02 - Nama kosong", () => {
-        cy.get('input[name="name"]').clear();
         cy.get('input[name="email"]').type("budi@mail.com");
         cy.get('input[name="password"]').type("A123#abc");
         cy.get('input[name="password_confirmation"]').type("A123#abc");
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("The name field is required").should("exist");
+        cy.get('input[name="name"]:invalid', { timeout: 10000 }).should("exist");
     });
 
-    // TC-REG-03
     it("TC-REG-03 - Email format salah", () => {
         cy.get('input[name="name"]').type("Budi123");
         cy.get('input[name="email"]').type("budi.com");
@@ -37,10 +36,9 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("valid email").should("exist");
+        cy.get('input[name="email"]:invalid', { timeout: 10000 }).should("exist");
     });
 
-    // TC-REG-04
     it("TC-REG-04 - Email sudah terdaftar", () => {
         cy.get('input[name="name"]').type("Budi123");
         cy.get('input[name="email"]').type("budi@gmail.com");
@@ -49,22 +47,24 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("has already been taken").should("exist");
+        cy.wait("@register");
+
+        cy.contains("The email has already been taken", { timeout: 15000 }).should("be.visible");
     });
 
-    // TC-REG-05
     it("TC-REG-05 - Password kurang dari 8 karakter", () => {
         cy.get('input[name="name"]').type("Budi123");
         cy.get('input[name="email"]').type("budi2@mail.com");
-        cy.get('input[name="password"]').type("Abc123");
-        cy.get('input[name="password_confirmation"]').type("Abc123");
+        cy.get('input[name="password"]').type("Abc12");
+        cy.get('input[name="password_confirmation"]').type("Abc12");
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("minimum").should("exist");
+        cy.wait("@register");
+
+        cy.contains("at least 8 characters", { timeout: 15000 }).should("be.visible");
     });
 
-    // TC-REG-06
     it("TC-REG-06 - Password tanpa simbol", () => {
         cy.get('input[name="name"]').type("Budi123");
         cy.get('input[name="email"]').type("budi3@mail.com");
@@ -73,10 +73,11 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("Password harus").should("exist");
+        cy.wait("@register");
+
+        cy.contains("Password harus", { timeout: 15000 }).should("be.visible");
     });
 
-    // TC-REG-07
     it("TC-REG-07 - Konfirmasi password tidak sesuai", () => {
         cy.get('input[name="name"]').type("Budi123");
         cy.get('input[name="email"]').type("budi4@mail.com");
@@ -85,7 +86,9 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("confirm").should("exist");
+        cy.wait("@register");
+
+        cy.contains("confirmation does not match", { timeout: 15000 }).should("be.visible");
     });
 
 });

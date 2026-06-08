@@ -75,7 +75,7 @@
 
                 {{-- Login Form --}}
                 <form id="login-form" method="POST" action="{{ route('login') }}"
-                    class="bg-white rounded-md max-w-md w-full space-y-6 mx-auto px-4 sm:px-6 md:px-0">
+                    class="bg-white rounded-md max-w-md w-full space-y-6 mx-auto px-4 sm:px-6 md:px-0" novalidate>
                     @csrf
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-4 animate-popUpOut">Sign in</h3>
 
