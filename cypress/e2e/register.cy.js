@@ -1,4 +1,5 @@
 describe("REGISTER TESTING", () => {
+
     beforeEach(() => {
         cy.visit("/register");
     });
@@ -12,7 +13,7 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.url().should("not.include", "/register");
+        cy.url().should("include", "/login");
     });
 
     // TC-REG-02
@@ -24,7 +25,7 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("name").should("exist");
+        cy.contains("The name field is required").should("exist");
     });
 
     // TC-REG-03
@@ -36,7 +37,7 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("email").should("exist");
+        cy.contains("valid email").should("exist");
     });
 
     // TC-REG-04
@@ -48,7 +49,7 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("sudah terdaftar").should("exist");
+        cy.contains("has already been taken").should("exist");
     });
 
     // TC-REG-05
@@ -60,7 +61,7 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("password").should("exist");
+        cy.contains("minimum").should("exist");
     });
 
     // TC-REG-06
@@ -72,11 +73,11 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("password").should("exist");
+        cy.contains("Password harus").should("exist");
     });
 
     // TC-REG-07
-    it("TC-REG-07 - Konfirmasi password tidak sama", () => {
+    it("TC-REG-07 - Konfirmasi password tidak sesuai", () => {
         cy.get('input[name="name"]').type("Budi123");
         cy.get('input[name="email"]').type("budi4@mail.com");
         cy.get('input[name="password"]').type("A123#abc");
@@ -84,6 +85,7 @@ describe("REGISTER TESTING", () => {
 
         cy.get('button[type="submit"]').click();
 
-        cy.contains("match").should("exist");
+        cy.contains("confirm").should("exist");
     });
+
 });
