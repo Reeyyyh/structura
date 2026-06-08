@@ -1,4 +1,4 @@
-describe("AUTH - REGISTER TESTING (Structura)", () => {
+describe("REGISTER TESTING", () => {
     beforeEach(() => {
         cy.visit("/register");
     });
