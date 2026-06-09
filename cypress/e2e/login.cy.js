@@ -4,7 +4,7 @@ describe("LOGIN TESTING", () => {
         cy.visit("/login");
     });
 
-    it("TC-LOG-01 - Login valid", () => {
+    it("TC-LOG-01 - Login dengan data valid", () => {
 
         cy.get('input[name="email"]', { timeout: 10000 })
             .should("be.visible")
@@ -20,7 +20,7 @@ describe("LOGIN TESTING", () => {
             .should("not.include", "/login");
     });
 
-    it("TC-LOG-02 - Email tidak terdaftar", () => {
+    it("TC-LOG-02 - Login dengan email tidak terdaftar ", () => {
 
         cy.get('input[name="email"]')
             .type("tidakada@gmail.com");
@@ -34,7 +34,7 @@ describe("LOGIN TESTING", () => {
             .should("be.visible");
     });
 
-    it("TC-LOG-03 - Email kosong", () => {
+    it("TC-LOG-03 - Login dengan email kosong ", () => {
 
         cy.get('input[name="password"]')
             .type("A123#abc");
@@ -45,7 +45,7 @@ describe("LOGIN TESTING", () => {
             .should("exist");
     });
 
-    it("TC-LOG-04 - Password salah", () => {
+    it("TC-LOG-04 - Login dengan password tidak sesuai ", () => {
 
         cy.get('input[name="email"]')
             .type("budi@gmail.com");
@@ -59,7 +59,7 @@ describe("LOGIN TESTING", () => {
             .should("be.visible");
     });
 
-    it("TC-LOG-05 - Password kosong", () => {
+    it("TC-LOG-05 - Login dengan password kosong ", () => {
 
         cy.get('input[name="email"]')
             .type("budi@gmail.com");
