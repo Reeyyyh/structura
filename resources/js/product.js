@@ -1,28 +1,31 @@
-// document.getElementById('filter-form').addEventListener('change', function() {
-//     this.submit();
-// });
+document.addEventListener("DOMContentLoaded", function () {
 
+    const sortPrice = document.getElementById('sort-price');
+    const filterForm = document.getElementById('filter-form');
 
-// Submit form when sorting or categories change
-document.getElementById('sort-price').addEventListener('change', function () {
-    document.getElementById('filter-form').submit();
+    if (sortPrice && filterForm) {
+        sortPrice.addEventListener('change', function () {
+            filterForm.submit();
+        });
+    }
+
+    const sidebar = document.querySelector("#sidebar");
+
+    if (sidebar && filterForm) {
+        sidebar.querySelectorAll("input[type=checkbox]").forEach((el) => {
+            el.addEventListener("change", () => {
+                filterForm.submit();
+            });
+        });
+    }
+
+    document.querySelectorAll('input[name="price_from"], input[name="price_to"]')
+        .forEach(input => {
+            input.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter' && filterForm) {
+                    e.preventDefault();
+                    filterForm.submit();
+                }
+            });
+        });
 });
-
-// Submit form when checkbox kategori berubah
-document.querySelectorAll("#sidebar input[type=checkbox]").forEach((el) => {
-    el.addEventListener("change", () => {
-        document.getElementById("filter-form").submit();
-    });
-});
-
-
-// Submit form saat enter di input price
-document.querySelectorAll('input[name="price_from"], input[name="price_to"]').forEach(input => {
-    input.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            document.getElementById('filter-form').submit();
-        }
-    });
-});
-
