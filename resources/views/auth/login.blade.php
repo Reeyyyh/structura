@@ -20,7 +20,7 @@
 <body class="font-Montserrat bg-white">
 
     {{-- Loader --}}
-    <div id="page-loader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
+    <div id="page-loader" class="hidden fixed inset-0 items-center justify-center bg-white z-50">
         <div class="text-4xl font-bold flex space-x-1 text-darkblue">
             <span class="dot animate-pulse delay-[0ms]">.</span>
             <span class="dot animate-pulse delay-[200ms]">.</span>
@@ -30,11 +30,9 @@
 
     {{-- Loader Script --}}
     <script>
-        window.addEventListener('beforeunload', () => {
-            document.getElementById('page-loader').classList.remove('hidden');
-        });
         window.addEventListener('load', () => {
-            document.getElementById('page-loader').classList.add('hidden');
+            const loader = document.getElementById('page-loader');
+            if (loader) loader.classList.add('hidden');
         });
     </script>
 
@@ -75,7 +73,7 @@
 
                 {{-- Login Form --}}
                 <form id="login-form" method="POST" action="{{ route('login') }}"
-                    class="bg-white rounded-md max-w-md w-full space-y-6 mx-auto px-4 sm:px-6 md:px-0">
+                    class="bg-white rounded-md max-w-md w-full space-y-6 mx-auto px-4 sm:px-6 md:px-0" novalidate>
                     @csrf
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-4 animate-popUpOut">Sign in</h3>
 

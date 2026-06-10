@@ -2,7 +2,12 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "cypress:open": "cypress open",
+        "cypress:run": "cypress run",
+        "test:register": "cypress run --spec \"cypress/e2e/register.cy.js\"",
+        "test:login": "cypress run --spec \"cypress/e2e/login.cy.js\"",
+        "test:profile": "cypress run --spec \"cypress/e2e/profile.cy.js\""
     },
     "devDependencies": {
         "autoprefixer": "^10.4.21",
