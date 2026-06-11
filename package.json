@@ -7,7 +7,8 @@
         "cypress:run": "cypress run",
         "test:register": "cypress run --spec \"cypress/e2e/register.cy.js\"",
         "test:login": "cypress run --spec \"cypress/e2e/login.cy.js\"",
-        "test:profile": "cypress run --spec \"cypress/e2e/profile.cy.js\""
+        "test:profile": "cypress run --spec \"cypress/e2e/profile.cy.js\"",
+        "test:product": "cypress run --spec \"cypress/e2e/product.cy.js\""
     },
     "devDependencies": {
         "autoprefixer": "^10.4.21",
