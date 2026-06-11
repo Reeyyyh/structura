@@ -16,10 +16,6 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver; // bisa ganti Imagick kalau ekstensi aktif
-use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends Resource
 {
