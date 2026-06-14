@@ -10,7 +10,8 @@
         "test:profile": "cypress run --spec \"cypress/e2e/profile.cy.js\"",
         "test:product": "cypress run --spec \"cypress/e2e/product.cy.js\"",
         "test:cart": "cypress run --spec \"cypress/e2e/cart.cy.js\"",
-        "test:price": "cypress run --spec \"cypress/e2e/price.cy.js\""
+        "test:price": "cypress run --spec \"cypress/e2e/price.cy.js\"",
+        "test:stock": "cypress run --spec \"cypress/e2e/stock.cy.js\""
     },
     "devDependencies": {
         "autoprefixer": "^10.4.21",
